@@ -439,3 +439,6 @@ curve = SubResource("Curve2D_2lft6")
 stream = ExtResource("9_0xm86")
 volume_db = -15.277
 autoplay = true
+
+[node name="issue" type="Node" parent="."]
+script = ExtResource("14_8u2lw")
