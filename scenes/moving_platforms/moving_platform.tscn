@@ -66,10 +66,12 @@ rotation = 1.5708
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
 rotation = -1.57004
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_hcp0o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 rotation = 0.00134607
+scale = Vector2(0.5, 0.5)
 shape = SubResource("CapsuleShape2D_i7ugs")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

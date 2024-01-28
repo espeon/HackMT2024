@@ -1,10 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://b0iwhan3emqtq"]
+[gd_scene load_steps=36 format=3 uid="uid://b0iwhan3emqtq"]
 
 [ext_resource type="SpriteFrames" uid="uid://dhg7152veu8rl" path="res://scenes/player/player_frames.tres" id="1_fgoj4"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_lsbkp"]
 [ext_resource type="Shape2D" uid="uid://bjs6uxtqlgw1q" path="res://scenes/player/CrouchCollisionShape.tres" id="3_ruosv"]
 [ext_resource type="Shape2D" uid="uid://2nydl5rx8vi2" path="res://scenes/player/StandingCollisionShape.tres" id="4_ces4e"]
 [ext_resource type="Texture2D" uid="uid://c6vbh6pla1oyt" path="res://assets/textures/other/particle.png" id="5_38dyt"]
+[ext_resource type="Script" path="res://scenes/player/PlayerFollower.gd" id="6_x6ljk"]
 
 [sub_resource type="Animation" id="Animation_54lqy"]
 length = 0.001
@@ -368,7 +369,6 @@ input_1/auto_advance = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7hmb2"]
-graph_offset = Vector2(-494.104, 262.004)
 nodes/air_crouch/node = SubResource("AnimationNodeTransition_wfhvm")
 nodes/air_crouch/position = Vector2(240, 380)
 "nodes/crouch 2/node" = SubResource("AnimationNodeAnimation_ntpq2")
@@ -412,7 +412,6 @@ metadata/player = false
 position = Vector2(0, -17.5)
 sprite_frames = ExtResource("1_fgoj4")
 animation = &"falling"
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -452,11 +451,6 @@ max_results = 0
 position = Vector2(0, -15)
 shape = ExtResource("4_ces4e")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -43)
-offset = Vector2(0, 6)
-position_smoothing_enabled = true
-
 [node name="Effects" type="Node2D" parent="."]
 
 [node name="jumpParticles" type="CPUParticles2D" parent="Effects"]
@@ -484,3 +478,16 @@ scale_amount_min = 0.4
 color_ramp = SubResource("Gradient_qgi5t")
 anim_speed_min = 29.3
 anim_speed_max = 29.3
+
+[node name="PlayerFollower" type="Node2D" parent="." node_paths=PackedStringArray("follow_target")]
+script = ExtResource("6_x6ljk")
+follow_target = NodePath("../AnimatedSprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="PlayerFollower"]
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("follow_target")]
+position = Vector2(0, -42)
+offset = Vector2(0, 6)
+process_callback = 0
+script = ExtResource("6_x6ljk")
+follow_target = NodePath("../PlayerFollower")

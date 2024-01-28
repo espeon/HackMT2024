@@ -22,7 +22,6 @@ var stuck_under_object = false
 var standing_cshape = preload("res://scenes/player/StandingCollisionShape.tres")
 var crouching_cshape = preload("res://scenes/player/CrouchCollisionShape.tres")
 
-
 #this happens onece when load into the screen
 func _ready():
 	position = start_position
